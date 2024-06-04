@@ -2,8 +2,6 @@ from DrissionPage import ChromiumOptions, ChromiumPage
 
 from fastapi import FastAPI
 
-from src.dtos.ISayHelloDto import ISayHelloDto
-from src.checkDA import check_DA
 import os
 
 app = FastAPI()
@@ -17,11 +15,6 @@ async def root():
 @app.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
-
-
-@app.post("/hello")
-async def hello_message(dto: ISayHelloDto):
-    return {"message": f"Hello {dto.message}"}
 
 
 @app.get("/ahref/kd/{keyword}")
@@ -62,9 +55,3 @@ async def getAhrefKD(keyword: str):
     #     print(kds)
 
     return {"keyword": keyword, "kd": kd, "des": kds}
-
-
-@app.get("/domain/da/{domain}")
-async def getDomainDA(domain: str):
-    data = check_DA(domain)
-    return data
