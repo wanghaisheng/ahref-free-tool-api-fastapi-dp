@@ -17,24 +17,9 @@ async def say_hello(name: str):
     return {"message": f"Hello {name}"}
 
 
-@app.get("/ahref/kd/{keyword}")
-async def getAhrefKD(keyword: str):
-
-    # Get the home directory (expands to the absolute path)
-    home_dir = os.path.expanduser("~")
-
-    # Define the Puppeteer cache directory path
-    puppeteer_cache_dir = os.path.join(home_dir, ".cache", "puppeteer")
-
-    print(puppeteer_cache_dir)
-    path = "/tmp/chromium"
-    path = "/vercel/.cache/puppeteer/chrome/linux-123.0.6312.86"
-
-    # Try each path in sequence until a valid one is found
-
-    # Check if the path exists
+def checkfile(path):  # Check if the path exists
     if os.path.exists(path):
-        print("tmp is found")
+        print(f"{path} is found")
         # List all files and directories in the path
         files_and_dirs = os.listdir(path)
 
@@ -45,7 +30,27 @@ async def getAhrefKD(keyword: str):
         for file in files:
             print(file)
     else:
-        print("The path does not exist")
+        print(f"The {path} does not exist")
+
+
+@app.get("/ahref/kd/{keyword}")
+async def getAhrefKD(keyword: str):
+
+    # Get the home directory (expands to the absolute path)
+    home_dir = os.path.expanduser("~")
+
+    # Define the Puppeteer cache directory path
+    puppeteer_cache_dir = os.path.join(home_dir, ".cache", "puppeteer")
+
+    print(puppeteer_cache_dir)
+    checkfile(puppeteer_cache_dir)
+    path = "/tmp/chromium"
+    checkfile(path)
+
+    path = "~/.cache/puppeteer/chrome/linux-123.0.6312.86"
+    checkfile("~/.cache/puppeteer/chrome")
+
+    # Try each path in sequence until a valid one is found
 
     co = ChromiumOptions().set_browser_path(path).auto_port()
     page1 = ChromiumPage(co)
