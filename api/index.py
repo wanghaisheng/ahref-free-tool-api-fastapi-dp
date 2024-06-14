@@ -19,7 +19,16 @@ async def say_hello(name: str):
 
 @app.get("/ahref/kd/{keyword}")
 async def getAhrefKD(keyword: str):
+
+    # Get the home directory (expands to the absolute path)
+    home_dir = os.path.expanduser("~")
+
+    # Define the Puppeteer cache directory path
+    puppeteer_cache_dir = os.path.join(home_dir, ".cache", "puppeteer")
+
+    print(puppeteer_cache_dir)
     path = "/tmp/chromium"
+    path = "/vercel/.cache/puppeteer/chrome/linux-123.0.6312.86"
 
     # Try each path in sequence until a valid one is found
 
