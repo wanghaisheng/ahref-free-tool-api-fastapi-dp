@@ -1,13 +1,13 @@
 {
-  "name": "nextjs-fastapi",
+  "name": "nextjs-fastapi-with-drissionpage",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "setup": "npm install",
+    "setup": "npm install && pip3 install -r requirements.txt",
     "fastapi-dev": "pip3 install -r requirements.txt && python3 -m uvicorn api.index:app --reload",
     "next-dev": "npm install && next dev --experimental-https",
     "dev": "concurrently \"npm run next-dev\" \"npm run fastapi-dev\"",
-    "build": "npm run dev && next build",
+    "build": "npm run setup && next build",
     "start": "next start",
     "lint": "next lint"
   },
